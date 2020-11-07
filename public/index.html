@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <title>Trang chủ</title>
+    <style>
+        .my-custom-scrollbar {
+            position: relative;
+            height: 400px;
+            overflow: auto;
+        }
+        
+        .table-wrapper-scroll-y {
+            display: block;
+        }
+        
+        #spin {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            z-index: 1;
+            width: 150px;
+            height: 150px;
+            margin: -75px 0 0 -75px;
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid #3498db;
+            width: 120px;
+            height: 120px;
+            -webkit-animation: spin 2s linear infinite;
+            animation: spin 2s linear infinite;
+        }
+        
+        @-webkit-keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+        
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="w3-modal" id="loader">
+        <div class="w3-animate-opacity" id="spin">
+
+        </div>
+    </div>
+    <div class="w3-container">
+        <div id="alert"></div>
+        <h2>Danh sách sinh viên</h2>
+        <br/>
+        <div class="w3-panel w3-display-container">
+            <button onclick="showCreateFormSinhVien()" class="w3-button w3-blue w3-display-left">Nhập mới</button>
+            <button onclick="reloadListSinhVien()" class="w3-button w3-white w3-border w3-display-right">Tải lại</button>
+        </div>
+        <br/>
+        <div class="my-custom-scrollbar table-wrapper-scroll-y">
+            <table class="w3-table-all">
+                <thead>
+                    <tr class="w3-blue">
+                        <th>Avatar</th>
+                        <th>ID</th>
+                        <th>Mã sinh viên</th>
+                        <th>Tên sinh viên</th>
+                        <th>Năm sinh</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody id="list_sinhviens">
+                    <tr>
+                        <td colspan="7">Đang tải...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="id01" class="w3-modal">
+            <div class="w3-modal-content w3-animate-opacity w3-card-4" style="max-width:50rem">
+                <header class="w3-container w3-blue">
+                    <span onclick="closeMyModal()" class="w3-button w3-display-topright">&times;</span>
+                    <h2 id="id01Title">Nhập mới</h2>
+                </header>
+                <div class="w3-container">
+                    <div id="form-message" class="w3-panel w3-red">
+
+                    </div>
+                    <input type="hidden" name="id">
+                    <p>
+                        <label>Mã sinh viên</label>
+                        <input class="w3-input w3-border" name="ma_sinhvien" type="text">
+                    </p>
+                    <p>
+                        <label>Tên sinh viên</label>
+                        <input type="text" class="w3-input w3-border" name="ten_sinhvien">
+                    </p>
+                    <p>
+                        <label>Năm sinh</label>
+                        <select id="namsinh" name="namsinh" class="w3-select w3-border">
+                        <option value="" disabled selected>Vui lòng chọn</option>
+                        </select>
+                    </p>
+                    <p>
+                        <label>Avatar</label>
+                        <input type="file" class="w3-input w3-border" id="file-input" name="file">
+                    </p>
+                    <footer>
+                        <p><button id="btnLuu" class="w3-btn w3-blue">Tạo</button> <button onclick="closeMyModal()" class="w3-btn w3-white w3-border">Hủy</button></p>
+                    </footer>
+                </div>
+            </div>
+        </div>
+        <div id="modalDeleteSinhVien"></div>
+    </div>
+    <script src="/javascripts/app.js"></script>
+    <script>
+        var x = document.getElementById('namsinh');
+        for (var i = 2020; i >= 1800; i--) {
+            var option = document.createElement("option");
+            option.text = i;
+            option.value = i;
+            x.appendChild(option);
+        }
+    </script>
+</body>
+
+</html>
